@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ecommerce';
+
+  product = {
+    name: "Iphone",
+    decription: "This is a costly mobile phone",
+    price : 100,
+    img: "../assets/images/iphone.webp"
+  }
+
+
 }
