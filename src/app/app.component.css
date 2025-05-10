@@ -1,0 +1,10 @@
+img{
+    height: 50%;
+    object-fit: contain;
+}
+
+.costly{
+    color: red;
+    /* background-color: #cec9c9; */
+    font-size: 20px;
+}

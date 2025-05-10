@@ -31,6 +31,7 @@
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
+            {{currentDate | date : 'long' | uppercase | lowercase | titlecase}}
             <form class="d-flex" role="search">
                 <input (input)="onInputSearch($event)" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button [disabled]="isEnable" class="btn btn-outline-success" type="submit">Search</button>

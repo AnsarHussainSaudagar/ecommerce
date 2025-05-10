@@ -1,0 +1,22 @@
+<div style="margin: auto;" class="container mt-4 row gap-4">
+    <!-- Structural Directives -->
+    <div *ngIf="myProducts.length === 0" class="mt-2">
+      <h1 style="text-align: center;">Sorry No Products Available</h1>
+    </div>
+    <div *ngFor="let product of myProducts" class="card col-lg-3" style="width: 18rem;">
+      <img [src]="product.img" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title">{{product.name }}</h5>
+        <p class="card-text">{{product.decription}}</p>
+        <b>
+  
+          <p>Price:
+            <span [ngStyle]="{'color' : product.price <= 100 ? 'green' : null}" class="costly"
+              [ngClass]="{'costly': product.price > 100}" class="costly">{{product.price | currency:'INR'}}
+            </span>
+          </p>
+        </b>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>

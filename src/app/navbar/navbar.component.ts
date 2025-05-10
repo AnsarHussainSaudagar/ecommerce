@@ -10,6 +10,8 @@ export class NavbarComponent {
   isEnable = true
   search = "";
 
+  currentDate = new Date();
+
   onInputSearch(e: any){
     // console.log(e.data);
     this.isEnable = false;

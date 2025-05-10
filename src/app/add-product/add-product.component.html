@@ -1,0 +1,33 @@
+
+<div class="container mt-4">
+    <p class="d-inline-flex gap-1">
+      <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+        aria-controls="collapseExample">
+        Add Product
+      </a>
+  
+    <div class="collapse container" id="collapseExample">
+      <div class="card card-body">
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Name</label>
+            <input name="name" [(ngModel)]="newProduct.name" type="text" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Description</label>
+            <input name="decription" [(ngModel)]="newProduct.decription" type="text" class="form-control"
+              id="exampleInputPassword1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Price</label>
+            <input name="price" [(ngModel)]="newProduct.price" type="number" class="form-control"
+              id="exampleInputPassword1">
+          </div>
+  
+          <button (click)="onSubmit()" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
