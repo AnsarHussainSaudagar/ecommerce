@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Product } from '../models/product.model';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-add-product',
@@ -14,12 +15,15 @@ export class AddProductComponent {
     img: '../assets/images/iphone.webp',
   };
 
-  @Output() productEmitter = new EventEmitter();
+  // productsService = new ProductsService();
+  constructor(private productsService: ProductsService){
 
-  onSubmit() {
-    // console.log(this.newProduct);
-    this.productEmitter.emit(this.newProduct);
-    
-    // this.products.push(this.newProduct)
   }
+
+  onSubmit(){
+    
+    this.productsService.products.push(this.newProduct);
+    
+  }
+  
 } 
