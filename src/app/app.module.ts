@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { CustomPipe } from './custom.pipe';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ProductsComponent } from './products/products.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { ProductsComponent } from './products/products.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    // import { HttpClientModule } from '@angular/common/http';
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

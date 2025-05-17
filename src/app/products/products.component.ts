@@ -8,23 +8,20 @@ import { ProductsService } from '../products.service';
 })
 export class ProductsComponent {
 
-  myProducts = this.productService.products
+  myProducts : any = [];
   
   @Input() details : any = 0;
   
   constructor(private productService: ProductsService){
-    console.log(this.details);
+    this.productService.getProductsData().subscribe((products: any) => {
+      this.myProducts = products
+    })
   }
-  /* 
-
-  */
 
   ngOnInit(){
-    console.log(this.details);
   }
 
   ngDoCheck(){
-    console.log("Do check");
     
   }
 

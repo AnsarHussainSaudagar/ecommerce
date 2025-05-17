@@ -1,30 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Product } from './models/product.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
   
-  products: Product[] = [
-    {
-      name: 'iPHone',
-      decription: 'This is a costly mobile phone',
-      price: 100,
-      img: '../assets/images/iphone.webp',
-    },
-    {
-      name: 'samsUNG TV',
-      decription: 'TV with good quality',
-      price: 260,
-      img: '../assets/images/tv.jpeg',
-    },
-    {
-      name: 'LG Fridge',
-      decription: 'Fridge with 5 stars',
-      price: 190,
-      img: '../assets/images/fridge.jpeg',
-    },
-    
-  ];
+  private URL = "https://68206cad259dad2655ac8199.mockapi.io/products";
+  products: Product[] = [];
+
+  constructor(private http: HttpClient){}
+
+  getProductsData(){
+    return this.http.get(this.URL);
+  }
 }
