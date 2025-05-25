@@ -21,9 +21,9 @@ export class AddProductComponent {
   }
 
   onSubmit(){
-    
-    this.productsService.products.push(this.newProduct);
-    
+    this.productsService.postProductData(this.newProduct).subscribe((data) => {
+      this.productsService.productSubject.next(true);
+    });
   }
   
 } 

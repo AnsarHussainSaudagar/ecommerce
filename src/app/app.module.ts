@@ -9,6 +9,13 @@ import { CustomPipe } from './custom.pipe';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ProductsComponent } from './products/products.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes : Routes = [
+  {path: '', component: ProductsComponent },
+  {path: 'about-us', component: AboutUsComponent}
+];
 
 @NgModule({
   declarations: [
@@ -17,13 +24,14 @@ import { HttpClientModule } from '@angular/common/http';
     TestComponent,
     CustomPipe,
     AddProductComponent,
-    ProductsComponent
+    ProductsComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    // import { HttpClientModule } from '@angular/common/http';
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,16 +9,39 @@ import { ProductsService } from '../products.service';
 export class ProductsComponent {
 
   myProducts : any = [];
+
   
   @Input() details : any = 0;
   
   constructor(private productService: ProductsService){
-    this.productService.getProductsData().subscribe((products: any) => {
-      this.myProducts = products
-    })
+  }
+  
+  // showProductsData(){
+  //   this.productService.getProductsData().subscribe((products: any) => {
+  //     this.myProducts = products
+  //   });
+  // }
+  productObs$ : any = this.productService.getProductsData();
+
+  onClickDelete(product_id : number){
+    
+    this.productService.deleteProductData(product_id).subscribe((data) => {
+      // console.log(data);
+      // this.showProductsData();
+      this.productObs$ = this.productService.getProductsData();
+
+    });
   }
 
   ngOnInit(){
+
+    this.productService.productSubject.subscribe((data) => {
+      // this.showProductsData();
+      this.productObs$ = this.productService.getProductsData();
+    });
+
+    // this.showProductsData();
+
   }
 
   ngDoCheck(){

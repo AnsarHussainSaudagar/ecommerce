@@ -1,10 +1,13 @@
+<app-add-product></app-add-product>
+
 <div style="margin: auto;" class="container mt-4 row gap-4">
     <!-- Structural Directives -->
-    <div *ngIf="myProducts.length === 0" class="mt-2">
+    <!-- <div *ngIf="productObs$ === 0" class="mt-2">
       <h1 style="text-align: center;">Sorry No Products Available</h1>
-    </div>
-    <div *ngFor="let product of myProducts" class="card col-lg-3" style="width: 18rem;">
-      <img [src]="product.img" class="card-img-top" alt="">
+    </div> -->
+    <!-- <div *ngFor="let product of myProducts" class="card col-lg-3" style="width: 18rem;"> -->
+    <div *ngFor="let product of productObs$ | async " class="card col-lg-3" style="width: 18rem;">
+      <img  [src]="product.img" class="card-img-top" alt="">
       <div class="card-body">
         <h5 class="card-title">{{product.name }}</h5>
         <p class="card-text">{{product.decription}}</p>
@@ -16,7 +19,8 @@
             </span>
           </p>
         </b>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary">Go </a>
+        <button class="mx-2 btn btn-danger" (click)="onClickDelete(product.id)">Delete</button>
       </div>
     </div>
   </div>
