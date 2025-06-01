@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ProductsService } from '../products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +14,7 @@ export class ProductsComponent {
   
   @Input() details : any = 0;
   
-  constructor(private productService: ProductsService){
+  constructor(private productService: ProductsService, private router: Router){
   }
   
   // showProductsData(){
@@ -30,6 +31,18 @@ export class ProductsComponent {
       // this.showProductsData();
       this.productObs$ = this.productService.getProductsData();
 
+    });
+  }
+
+  onClickImg(product_id: string){
+  
+    /* 
+      /view-product/2 
+    */
+    this.router.navigate(['view-product', product_id], {
+      queryParams: {
+        type: "costly"
+      }
     });
   }
 

@@ -1,0 +1,8 @@
+<div class="container">
+    <img [src]="product.img" alt="">
+    <!-- <span class="badge badge-danger">Costly</span> -->
+    <h6 *ngIf="isCostly"><span class="badge text-bg-danger">Costly</span></h6>
+    <h1>{{product.name}}</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui in molestias voluptate rerum provident ullam, tenetur consequatur, doloribus earum obcaecati eius magnam maxime. Reiciendis obcaecati quisquam neque consequatur reprehenderit corrupti.</p>
+    <h3>Price : {{product.price | currency: 'INR'}}</h3>
+</div>
