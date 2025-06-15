@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./my-profile.component.css']
 })
 export class MyProfileComponent {
-
+  constructor(){
+    console.log("My Profile component");
+    
+  }
 }
