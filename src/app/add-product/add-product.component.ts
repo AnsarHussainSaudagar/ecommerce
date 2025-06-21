@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../products.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-product',
@@ -8,37 +9,70 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent {
+
+  productForm!: FormGroup;
   isSubmitting = false;
-  newProduct: Product = {
-    name: '',
-    decription: '',
-    price: '',
-    img: '../assets/images/iphone.webp',
-  };
+  // newProduct: Product = {
+  //   name: '',
+  //   decription: '',
+  //   price: '',
+  //   img: '../assets/images/iphone.webp',
+  // };
 
   // productsService = new ProductsService();
   constructor(private productsService: ProductsService){
-
+    this.productForm = new FormGroup({
+      'name' : new FormControl('', [Validators.required, Validators.minLength(4)]),
+      'description': new FormControl(''),
+      'price': new FormControl(null)
+    });
   }
 
-  onSubmit(productForm : any){
+  // onSubmit(productForm : any){
     
-    if(productForm.form.status === 'VALID'){
-      this.isSubmitting = true;
-      this.productsService.postProductData(this.newProduct).subscribe({
+  //   if(productForm.form.status === 'VALID'){
+  //     this.isSubmitting = true;
+  //     this.productsService.postProductData(this.newProduct).subscribe({
+  //       next: (data) => {
+  //         this.productsService.productSubject.next(true);
+  //         this.isSubmitting = false;
+  //         productForm.resetForm();
+  //       },
+  //       error: (error) => {
+  //         console.error('Error adding product:', error);
+  //         this.isSubmitting = false;
+  //       }
+  //     });
+  //   } else {
+  //     console.log("Form is invalid");
+  //   }
+  // }
+
+  submitted : boolean = false;
+  get name(){
+    return this.productForm.get('name');
+  }
+
+  onSubmit(){
+
+    console.log(this.productForm);
+    this.submitted = true;
+    
+    if(this.productForm.status === 'VALID'){
+      
+      this.productsService.postProductData(this.productForm.value).subscribe({
         next: (data) => {
           this.productsService.productSubject.next(true);
-          this.isSubmitting = false;
-          productForm.resetForm();
         },
         error: (error) => {
           console.error('Error adding product:', error);
-          this.isSubmitting = false;
         }
       });
     } else {
-      console.log("Form is invalid");
+      console.log("Form is not valid");
+      
     }
+    
   }
   
 } 

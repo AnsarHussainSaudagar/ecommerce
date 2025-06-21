@@ -1,11 +1,12 @@
 <div class="container mt-4">
-    <p class="d-inline-flex gap-1">
-      <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-        aria-controls="collapseExample">
-        Add Product
-      </a>
-  
-    <div class="collapse container" id="collapseExample">
+  <p class="d-inline-flex gap-1">
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+      aria-controls="collapseExample">
+      Add Product
+    </a>
+
+    <!-- Template driven -->
+    <!-- <div class="collapse container" id="collapseExample">
       <div class="card card-body">
         <form #form="ngForm" (ngSubmit)="onSubmit(form)" >
           <div class="mb-3">
@@ -44,6 +45,35 @@
           </button>
         </form>
       </div>
+    </div> -->
+  <div class="collapse container" id="collapseExample">
+    <div class="card card-body">
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Name</label>
+          <input formControlName="name"  type="text" class="form-control "
+            id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div *ngIf="(name?.errors && name?.touched) || (name?.errors && submitted)">
+              <p *ngIf="name?.errors?.['required']" class="text-danger">Name is compulsory</p>
+              <p *ngIf="name?.errors?.['minlength']" class="text-danger">Name must contain atleast 4 letter</p>
+            </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Description</label>
+          <input formControlName="description"  type="text" class="form-control"
+            id="exampleInputPassword1">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Price</label>
+          <input formControlName="price" type="number" class="form-control"
+            id="exampleInputPassword1">
+        </div>
+
+        <button type="submit" class="btn btn-primary d-flex align-items-center gap-2" [disabled]="isSubmitting"
+          [class.btn-loading]="isSubmitting">
+          Submit
+        </button>
+      </form>
     </div>
   </div>
-  
+</div>
