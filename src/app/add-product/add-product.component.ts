@@ -8,10 +8,11 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent {
+  isSubmitting = false;
   newProduct: Product = {
     name: '',
     decription: '',
-    price: 0,
+    price: '',
     img: '../assets/images/iphone.webp',
   };
 
@@ -20,10 +21,24 @@ export class AddProductComponent {
 
   }
 
-  onSubmit(){
-    this.productsService.postProductData(this.newProduct).subscribe((data) => {
-      this.productsService.productSubject.next(true);
-    });
+  onSubmit(productForm : any){
+    
+    if(productForm.form.status === 'VALID'){
+      this.isSubmitting = true;
+      this.productsService.postProductData(this.newProduct).subscribe({
+        next: (data) => {
+          this.productsService.productSubject.next(true);
+          this.isSubmitting = false;
+          productForm.resetForm();
+        },
+        error: (error) => {
+          console.error('Error adding product:', error);
+          this.isSubmitting = false;
+        }
+      });
+    } else {
+      console.log("Form is invalid");
+    }
   }
   
 } 

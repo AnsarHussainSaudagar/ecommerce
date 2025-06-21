@@ -1,4 +1,3 @@
-
 <div class="container mt-4">
     <p class="d-inline-flex gap-1">
       <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
@@ -8,11 +7,21 @@
   
     <div class="collapse container" id="collapseExample">
       <div class="card card-body">
-        <form>
+        <form #form="ngForm" (ngSubmit)="onSubmit(form)" >
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Name</label>
-            <input name="name" [(ngModel)]="newProduct.name" type="text" class="form-control" id="exampleInputEmail1"
-              aria-describedby="emailHelp">
+            <input 
+            #name="ngModel"  minlength="4" required name="name" [(ngModel)]="newProduct.name" type="text" class="form-control " id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            [ngClass]="{
+              'border-danger': (name.errors && name.touched) || (name.errors && form.submitted)
+            }"
+              >
+
+            <div *ngIf="(name.errors && name.touched) || (name.errors && form.submitted)">
+              <p *ngIf="name.errors['required']" class="text-danger">Name is compulsory</p>
+              <p *ngIf="name.errors['minlength']" class="text-danger">Name must contain atleast 4 letter</p>
+            </div>
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Description</label>
@@ -25,7 +34,14 @@
               id="exampleInputPassword1">
           </div>
   
-          <button (click)="onSubmit()" type="submit" class="btn btn-primary">Submit</button>
+          <button 
+            type="submit" 
+            class="btn btn-primary d-flex align-items-center gap-2" 
+            [disabled]="isSubmitting"
+            [class.btn-loading]="isSubmitting">
+            <span class="spinner-border spinner-border-sm" *ngIf="isSubmitting" role="status" aria-hidden="true"></span>
+            {{ isSubmitting ? 'Adding Product...' : 'Add Product' }}
+          </button>
         </form>
       </div>
     </div>
