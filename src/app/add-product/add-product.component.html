@@ -56,6 +56,7 @@
             <div *ngIf="(name?.errors && name?.touched) || (name?.errors && submitted)">
               <p *ngIf="name?.errors?.['required']" class="text-danger">Name is compulsory</p>
               <p *ngIf="name?.errors?.['minlength']" class="text-danger">Name must contain atleast 4 letter</p>
+              <p *ngIf="name?.errors?.['nameForbidden']" class="text-danger">Admin name is not allowed</p>
             </div>
         </div>
         <div class="mb-3">

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, signal, effect, computed } from '@angular/core';
+import { first, Observable, of } from 'rxjs';
 
 // Component Directive
 @Component({
@@ -10,6 +10,47 @@ import { Observable, of } from 'rxjs';
 export class AppComponent {
   title: string = 'ecommerce';
   error = "";
+
+  firstName = signal("Ansar");
+  lastName = signal("Saudagar")
+
+  // fullName = this.firstName() + " " + this.lastName();
+  fullName = computed(() => {
+    return this.firstName() + " " + this.lastName()
+  });
+
+  counter = signal(0);
+
+  constructor(){
+    // console.log(this.counter());
+    console.log(this.fullName());
+
+    this.firstName.set("John")
+
+    // console.log(this.fullName());
+    effect(() => {
+      console.log("The count is now changed " + this.counter());
+    });
+    
+    
+  }
+
+  increment(){
+    
+    this.counter.update(value => {
+      return ++value;
+    });
+  }
+
+  decrement(){
+    this.counter.update(value => {
+      return --value;
+    });
+  }
+
+
+  
+
   // nameArr : any = [];
   // nameObservable$ = of('Rahul', 'Ankush', 'Rohit');
   // constructor(){

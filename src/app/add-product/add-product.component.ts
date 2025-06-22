@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../products.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { forbiddenWordsValidator } from '../validators/forbidden-words.validator';
 
 @Component({
   selector: 'app-add-product',
@@ -10,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AddProductComponent {
 
-  productForm!: FormGroup;
+  productForm: FormGroup;
   isSubmitting = false;
   // newProduct: Product = {
   //   name: '',
@@ -20,12 +21,17 @@ export class AddProductComponent {
   // };
 
   // productsService = new ProductsService();
-  constructor(private productsService: ProductsService){
-    this.productForm = new FormGroup({
-      'name' : new FormControl('', [Validators.required, Validators.minLength(4)]),
-      'description': new FormControl(''),
-      'price': new FormControl(null)
+  constructor(private productsService: ProductsService, private fb : FormBuilder){
+    this.productForm = this.fb.group({
+      'name' : ['', [Validators.required, Validators.minLength(4), forbiddenWordsValidator()]],
+      'description': [''],
+      'price'  :[null]
     });
+    // this.productForm = new FormGroup({
+    //   'name' : new FormControl('', [Validators.required, Validators.minLength(4), forbiddenWordsValidator()]),
+    //   'description': new FormControl(''),
+    //   'price': new FormControl(null)
+    // });
   }
 
   // onSubmit(productForm : any){

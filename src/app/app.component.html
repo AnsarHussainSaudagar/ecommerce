@@ -1,5 +1,13 @@
 <app-navbar ></app-navbar>
 
+<div style="display: flex; justify-content: flex-start; gap: 10px; align-items: center;">
+    <button class="btn btn-primary" (click)="decrement()" > - </button>
+    <h3>{{counter()}}</h3>
+    <button class="btn btn-primary" (click)="increment()" > + </button>
+
+</div>
+
+
 <router-outlet></router-outlet>
 
 <!-- <app-products [details]="userDetails"></app-products>
